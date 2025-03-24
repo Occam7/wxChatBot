@@ -1,0 +1,104 @@
+<view class="home-container">
+  <!-- 顶部导航栏 -->
+  <view class="header">
+    <text class="header-title">健康助手</text>
+  </view>
+
+  <!-- 聊天内容区 -->
+  <scroll-view scroll-y="true" class="chat-box" scroll-into-view="{{scrollToView}}" enhanced="true" show-scrollbar="true" bounces="true">
+    <!-- 欢迎卡片 -->
+    <view class="welcome-card" wx:if="{{showWelcome}}" >
+      <view class="welcome-header">
+        <image class="welcome-avatar" src="/assets/index.png" />
+        <view class="welcome-text">
+          <view class="welcome-title">您好，欢迎使用健康助手</view>
+          <view class="welcome-subtitle">我可以回答您的健康问题</view>
+        </view>
+        <van-icon name="cross" class="welcome-close" bind:tap="closeWelcomeCard" />
+      </view>
+
+      <view class="welcome-content">
+        您可以向我咨询基础健康知识，选择下方快捷问题或直接输入您的问题。如需专业医疗咨询，请点击下方功能区进入相应服务。
+      </view>
+
+      <view class="quick-questions">
+        <view
+                wx:for="{{quickQuestions}}"
+                wx:key="index"
+                class="quick-question-item"
+                bind:tap="onQuickQuestionTap"
+                data-question="{{item}}"
+        >
+          {{item}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 聊天消息 -->
+    <block wx:for="{{messages}}" wx:key="index">
+      <view class="chat-item {{item.role}}" id="msg-{{index}}">
+        <view class="bubble animated fadeIn">
+          <!-- 使用towxml渲染markdown -->
+          <block wx:if="{{item.role === 'assistant' && item.towxml}}">
+            <view class = "markdown-container">
+              <towxml nodes="{{item.towxml}}"/>
+            </view>
+          </block>
+          <!-- 普通文本 -->
+          <block wx:else>
+            <text user-select="true">{{item.content}}</text>
+          </block>
+        </view>
+      </view>
+    </block>
+
+    <!-- 思考动画 -->
+    <view class="chat-item assistant" wx:if="{{isThinking}}" id="thinking-animation">
+<!--      <image class="avatar" src="/assets/ai.png" />-->
+      <view class="bubble thinking-bubble">
+        <view class="dot-flashing"></view>
+      </view>
+    </view>
+    <!-- 在消息列表的最后添加一个底部占位元素 -->
+    <view class="bottom-anchor" id="bottom-anchor" style="height: 80rpx; "></view>
+  </scroll-view>
+
+  <!-- 底部输入区 -->
+  <view class="input-area" >
+    <van-field
+            class="input-text"
+            placeholder="请输入您的问题"
+            model:value="{{userInput}}"
+            autosize
+            use-button-slot
+    >
+      <van-button type="info" slot="button" round="true" bind:tap="sendMessage">
+        <van-icon name="arrow-up" />
+      </van-button>
+    </van-field>
+  </view>
+
+  <!-- 功能区 -->
+  <view class="function-area">
+    <view class="function-item" bind:tap="navigateToMedical">
+      <view class="function-icon medical-icon">
+        <van-icon name="manager" size="28px" />
+      </view>
+      <text class="function-text">寻医问诊</text>
+    </view>
+
+    <view class="function-item" bind:tap="navigateToMedicine">
+      <view class="function-icon medicine-icon">
+        <van-icon name="gift-card" size="28px" />
+      </view>
+      <text class="function-text">智能问药</text>
+    </view>
+
+    <view class="function-item" bind:tap="navigateToHealth">
+      <view class="function-icon health-icon">
+        <van-icon name="checked" size="28px" />
+      </view>
+      <text class="function-text">养生保健</text>
+    </view>
+  </view>
+</view>

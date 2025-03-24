@@ -1,0 +1,402 @@
+.doctor-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f5f7fa;
+}
+
+/* 顶部导航栏 */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 24rpx;
+    background-color: #3f72af;
+    color: #fff;
+    position: relative;
+    z-index: 10;
+}
+
+.header-icon-left {
+    margin-right: 16rpx;
+    color: #fff;
+}
+
+.header-doctor-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.header-doctor-avatar {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+    border: 2rpx solid #fff;
+    margin-right: 12rpx;
+}
+
+.header-doctor-text {
+    flex: 1;
+}
+
+.header-doctor-name {
+    font-size: 30rpx;
+    font-weight: 500;
+}
+
+.header-doctor-title {
+    font-size: 22rpx;
+    opacity: 0.8;
+}
+
+.header-arrow {
+    margin-left: 8rpx;
+}
+
+.header-right-icons {
+    display: flex;
+}
+
+.header-icon-right {
+    margin-left: 20rpx;
+    color: #fff;
+}
+
+/* 聊天区域 */
+.chat-box {
+    flex: 1;
+    padding: 20rpx;
+    overflow-y: auto;
+}
+
+/* 介绍卡片 */
+.doctor-intro {
+    margin-bottom: 30rpx;
+    border-radius: 16rpx;
+    background-color: #fff;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.intro-header {
+    display: flex;
+    align-items: center;
+    padding: 20rpx;
+    background-color: #3f72af;
+    position: relative;
+}
+
+.intro-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    margin-right: 16rpx;
+    border: 2rpx solid #fff;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro-title {
+    font-size: 32rpx;
+    color: #fff;
+    font-weight: 500;
+}
+
+.intro-subtitle {
+    font-size: 24rpx;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 4rpx;
+}
+
+.intro-close {
+    position: absolute;
+    top: 16rpx;
+    right: 16rpx;
+    color: #fff;
+}
+
+.intro-content {
+    padding: 24rpx;
+    font-size: 28rpx;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 快速问题 */
+.quick-questions {
+    display: flex;
+    flex-direction: column;
+    padding: 0 24rpx 24rpx;
+}
+
+.quick-question-item {
+    background-color: #f0f5ff;
+    color: #3f72af;
+    padding: 16rpx 24rpx;
+    border-radius: 40rpx;
+    font-size: 24rpx;
+    margin-bottom: 16rpx;
+    text-align: center;
+}
+
+/* 聊天气泡 */
+.chat-item {
+    display: flex;
+    margin-bottom: 30rpx;
+}
+
+.chat-item.user {
+    flex-direction: row-reverse;
+}
+
+.chat-item.system {
+    justify-content: center;
+}
+
+.avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    margin: 0 16rpx;
+}
+
+.bubble {
+    max-width: 70%;
+    padding: 20rpx;
+    border-radius: 12rpx;
+    font-size: 28rpx;
+    line-height: 1.5;
+    word-break: break-all;
+    position: relative;
+}
+
+.user .bubble {
+    background-color: #3f72af;
+    color: #fff;
+    border-top-right-radius: 0;
+}
+
+.assistant .bubble {
+    background-color: #fff;
+    color: #333;
+    border-top-left-radius: 0;
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.system .bubble {
+    background-color: #f0f0f0;
+    color: #666;
+    font-size: 24rpx;
+    padding: 12rpx 24rpx;
+    max-width: 90%;
+}
+
+.doctor-reply-name {
+    font-size: 24rpx;
+    color: #3f72af;
+    margin-bottom: 8rpx;
+    font-weight: 500;
+}
+
+/* 思考动画 */
+.thinking-bubble {
+    padding: 28rpx 40rpx;
+    min-width: 80rpx;
+}
+
+.dot-flashing {
+    position: relative;
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 5rpx;
+    background-color: #999;
+    animation: dot-flashing 1s infinite linear alternate;
+    animation-delay: 0.5s;
+}
+
+.dot-flashing::before, .dot-flashing::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+}
+
+.dot-flashing::before {
+    left: -15rpx;
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 5rpx;
+    background-color: #999;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 0s;
+}
+
+.dot-flashing::after {
+    left: 15rpx;
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 5rpx;
+    background-color: #999;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 1s;
+}
+
+@keyframes dot-flashing {
+    0% {
+        background-color: #999;
+    }
+    50%, 100% {
+        background-color: #ccc;
+    }
+}
+
+/* 输入区域 */
+.input-area {
+    padding: 20rpx;
+    background-color: #fff;
+    border-top: 1rpx solid #eee;
+}
+
+/* 医生列表弹窗 */
+.doctor-list-popup {
+    height: 70%;
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    overflow: hidden;
+}
+
+.doctor-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30rpx 24rpx;
+    border-bottom: 1rpx solid #eee;
+    font-size: 32rpx;
+    font-weight: 500;
+}
+
+.doctors-container {
+    height: calc(100% - 90rpx);
+}
+
+.doctor-item {
+    display: flex;
+    align-items: center;
+    padding: 24rpx;
+    border-bottom: 1rpx solid #f5f5f5;
+}
+
+.doctor-item.active {
+    background-color: #f0f5ff;
+}
+
+.doctor-list-avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+    border: 1rpx solid #eee;
+}
+
+.doctor-info {
+    flex: 1;
+}
+
+.doctor-name {
+    font-size: 30rpx;
+    font-weight: 500;
+    margin-bottom: 8rpx;
+}
+
+.doctor-specialty {
+    font-size: 24rpx;
+    color: #666;
+}
+
+.doctor-status {
+    font-size: 24rpx;
+    padding: 6rpx 16rpx;
+    border-radius: 100rpx;
+}
+
+.doctor-status.online {
+    background-color: #e6f7eb;
+    color: #52c41a;
+}
+
+.doctor-status.offline {
+    background-color: #f5f5f5;
+    color: #999;
+}
+
+/* 动画 */
+.animated {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+/* towxml组件样式定制 */
+.bubble .h2w {
+    font-size: 28rpx;
+    line-height: 1.6;
+    word-break: break-all;
+}
+
+/* 确保在聊天气泡内不会有额外的外边距 */
+.bubble .h2w view {
+    margin: 0;
+}
+
+/* 自定义标题样式 */
+.bubble .h2w__h3 {
+    font-size: 32rpx;
+    margin: 8rpx 0;
+    font-weight: bold;
+    color: #3f72af;
+}
+
+/* 自定义列表样式，确保在气泡内的正确缩进 */
+.bubble .h2w__ul,
+.bubble .h2w__ol {
+    padding-left: 24rpx;
+    margin: 8rpx 0;
+}
+
+/* 调整列表项样式 */
+.bubble .h2w__li {
+    margin: 4rpx 0;
+}
+
+/* 强调文本 */
+.bubble .h2w__strong {
+    font-weight: bold;
+    color: #333;
+}
+.chat-box {
+    flex: 1;
+    padding: 20rpx;
+    overflow-y: scroll;
+    margin-bottom: 120rpx;
+    -webkit-overflow-scrolling: touch; /* 增强iOS滚动体验 */
+}
+.bottom-anchor {
+    height: 80rpx;
+    width: 100%;
+    clear: both;
+}

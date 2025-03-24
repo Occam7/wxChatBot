@@ -1,0 +1,324 @@
+/* 基础样式 */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f6f8fa;
+}
+
+/* 顶部导航栏样式 */
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16rpx 32rpx;
+  background-color: #f1f8f8;
+  color: #333;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+/* 聊天内容区 */
+.chat-box {
+  flex: 1;
+  padding: 20rpx;
+  overflow-y: scroll;
+  margin-bottom: 120rpx; /* 为底部功能区留出空间 */
+}
+
+/* 欢迎卡片 */
+.welcome-card {
+  margin: 20rpx 0;
+  padding: 30rpx;
+  background-color: #f0faff;
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  position: relative;
+  left:-24rpx;
+  border: 2rpx solid #e6f4ff;
+}
+
+.welcome-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.welcome-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.welcome-text {
+  flex: 1;
+}
+
+.welcome-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+
+.welcome-subtitle {
+  font-size: 28rpx;
+  color: #0084ff;
+}
+
+.welcome-close {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  font-size: 32rpx;
+  color: #999;
+}
+
+.welcome-content {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+.quick-questions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.quick-question-item {
+  flex: 1;
+  min-width: 280rpx;
+  padding: 16rpx 24rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: #0084ff;
+  border: 1rpx solid #e0e0ff;
+  text-align: center;
+}
+
+/* 聊天消息 */
+.chat-item {
+  display: flex;
+  margin-bottom: 20rpx;
+  animation: fadeIn 0.4s ease-in;
+}
+
+.chat-item.user {
+  flex-direction: row-reverse;
+}
+
+.avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  margin: 0 16rpx;
+}
+
+.bubble {
+  max-width: 70%;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.chat-item.user .bubble {
+  background-color: #daf1ff;
+}
+
+/* 思考动画 */
+.thinking-bubble {
+  padding: 24rpx 40rpx;
+  min-height: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.dot-flashing {
+  position: relative;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background-color: #007aff;
+  color: #007aff;
+  animation: dot-flashing 1s infinite linear alternate;
+  animation-delay: 0.5s;
+}
+
+.dot-flashing::before, .dot-flashing::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-flashing::before {
+  left: -28rpx;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background-color: #007aff;
+  color: #007aff;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 0s;
+}
+
+.dot-flashing::after {
+  left: 28rpx;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background-color: #007aff;
+  color: #007aff;
+  animation: dot-flashing 1s infinite alternate;
+  animation-delay: 1s;
+}
+
+@keyframes dot-flashing {
+  0% {
+    background-color: #007aff;
+  }
+  50%, 100% {
+    background-color: rgba(0, 122, 255, 0.2);
+  }
+}
+
+/* 输入区域 */
+.input-area {
+  position: fixed;
+  bottom: 120rpx; /* 保留功能区空间 */
+  left: 0;
+  right: 0;
+  padding: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  z-index: 10;
+  height: 189rpx; display: block; box-sizing: border-box; left: 0rpx; top: 1141rpx
+}
+
+/* 功能区 */
+.function-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx 0;
+  background-color: #ffffff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  border-top: 1rpx solid #f0f0f0;
+  z-index: 11;
+}
+
+.function-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.function-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.medical-icon {
+  background-color: #e6f7ff;
+  color: #1890ff;
+}
+
+.medicine-icon {
+  background-color: #f6ffed;
+  color: #52c41a;
+}
+
+.health-icon {
+  background-color: #fff7e6;
+  color: #fa8c16;
+}
+
+.function-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.animated.fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* towxml 内容样式调整 */
+.bubble .h2w {
+  font-size: 28rpx;
+  line-height: 1.6;
+  word-break: break-all;
+}
+
+.bubble .h2w view {
+  margin: 0;
+}
+
+.bubble .h2w__h3 {
+  font-size: 32rpx;
+  margin: 8rpx 0;
+  font-weight: bold;
+  color: #0084ff;
+}
+
+.bubble .h2w__ul,
+.bubble .h2w__ol {
+  padding-left: 24rpx;
+  margin: 8rpx 0;
+}
+
+.bubble .h2w__li {
+  margin: 4rpx 0;
+}
+
+.bubble .h2w__strong {
+  font-weight: bold;
+  color: #333;
+}
+
+/*!* 添加到现有CSS中 *!*/
+/*.markdown-container {*/
+/*  width: 80%;*/
+/*  overflow-x: hidden;*/
+/*  word-break: break-all;*/
+/*}*/
+
+/* 修改聊天框样式确保滚动正常 */
+.chat-box {
+  flex: 1;
+  padding: 20rpx;
+  overflow-y: scroll;
+  margin-bottom: 120rpx;
+  -webkit-overflow-scrolling: touch; /* 增强iOS滚动体验 */
+}
+.bottom-anchor {
+  height: 80rpx;
+  width: 100%;
+  clear: both;
+}

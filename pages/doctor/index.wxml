@@ -1,0 +1,133 @@
+<view class="doctor-container">
+    <!-- 医生列表弹窗 -->
+    <van-popup
+            show="{{ showDoctorList }}"
+            position="bottom"
+            custom-class="doctor-list-popup"
+            bind:close="toggleDoctorList"
+            overlay
+    >
+        <view class="doctor-list-header">
+            <text>选择医生</text>
+            <van-icon name="cross" bind:tap="toggleDoctorList" />
+        </view>
+
+        <scroll-view scroll-y class="doctors-container">
+            <view
+                    wx:for="{{ doctors }}"
+                    wx:key="id"
+                    class="doctor-item {{ item.id === currentDoctor.id ? 'active' : '' }}"
+                    bind:tap="selectDoctor"
+                    data-id="{{ item.id }}"
+            >
+                <image class="doctor-list-avatar" src="{{ item.avatar }}" />
+                <view class="doctor-info">
+                    <view class="doctor-name">{{ item.name }}</view>
+                    <view class="doctor-specialty">{{ item.title }} · {{ item.department }}</view>
+                </view>
+                <view class="doctor-status {{ item.online ? 'online' : 'offline' }}">
+                    {{ item.online ? '在线' : '离线' }}
+                </view>
+            </view>
+        </scroll-view>
+    </van-popup>
+
+    <!-- 顶部导航栏 -->
+    <view class="header">
+        <van-icon name="arrow-left" size="22" class="header-icon-left" bind:tap="navigateBack" />
+        <view class="header-doctor-info" bind:tap="toggleDoctorList">
+            <image class="header-doctor-avatar" src="{{ currentDoctor.avatar }}" />
+            <view class="header-doctor-text">
+                <view class="header-doctor-name">{{ currentDoctor.name }}</view>
+                <view class="header-doctor-title">{{ currentDoctor.title }} · {{ currentDoctor.department }}</view>
+            </view>
+            <van-icon name="arrow-down" size="14" class="header-arrow" />
+        </view>
+        <view class="header-right-icons">
+            <van-icon name="replay" size="22" class="header-icon-right" bind:tap="startNewConsultation" />
+        </view>
+    </view>
+
+    <!-- 聊天内容区 -->
+    <scroll-view
+            scroll-y="true"
+            class="chat-box"
+            scroll-into-view="{{scrollToView}}"
+    >
+        <!-- 医生介绍卡片 -->
+        <view class="doctor-intro" wx:if="{{showDoctorIntro}}">
+            <view class="intro-header">
+                <image class="intro-avatar" src="{{ currentDoctor.avatar }}" />
+                <view class="intro-text">
+                    <view class="intro-title">您好，我是{{ currentDoctor.name }}</view>
+                    <view class="intro-subtitle">{{ currentDoctor.title }} · {{ currentDoctor.department }}</view>
+                </view>
+                <van-icon name="cross" class="intro-close" bind:tap="closeDoctorIntro" />
+            </view>
+
+            <view class="intro-content">
+                很高兴为您提供专业的医疗咨询服务。您可以向我咨询任何健康相关的问题，我将根据专业知识为您解答。请注意，线上咨询仅供参考，如有紧急情况请立即前往医院就诊。
+            </view>
+
+            <view class="quick-questions">
+                <view
+                        wx:for="{{quickQuestions}}"
+                        wx:key="index"
+                        class="quick-question-item"
+                        bind:tap="onQuickQuestionTap"
+                        data-question="{{item}}"
+                >
+                    {{item}}
+                </view>
+            </view>
+        </view>
+
+        <!-- 聊天消息 -->
+        <block wx:for="{{messages}}" wx:key="index">
+            <view class="chat-item {{item.role}}" id="msg-{{index}}">
+                <block wx:if="{{item.role === 'assistant'}}">
+                    <image class="avatar" src="{{item.doctorAvatar || currentDoctor.avatar}}" />
+                </block>
+                <view class="bubble animated fadeIn">
+                    <view wx:if="{{item.role === 'assistant'}}" class="doctor-reply-name">{{item.doctorName || currentDoctor.name}}</view>
+
+                    <!-- 对助手消息使用towxml渲染Markdown -->
+                    <block wx:if="{{item.role === 'assistant' && item.towxml}}">
+                        <towxml nodes="{{item.towxml}}"/>
+                    </block>
+
+                    <!-- 普通文本消息 -->
+                    <block wx:else>
+                        {{item.content}}
+                    </block>
+                </view>
+            </view>
+        </block>
+
+        <!-- 思考动画 -->
+        <view class="chat-item assistant" wx:if="{{isThinking}}" id="thinking-animation">
+            <image class="avatar" src="{{ currentDoctor.avatar }}" />
+            <view class="bubble thinking-bubble">
+                <view class="dot-flashing"></view>
+            </view>
+        </view>
+
+        <view class="bottom-anchor" id="bottom-anchor" style="height: 80rpx; "></view>
+    </scroll-view>
+
+    <!-- 底部输入区域 -->
+    <view class="input-area">
+        <van-field
+                class="input-text"
+                placeholder="请输入您想咨询的问题"
+                bind:change="onInputChange"
+                model:value="{{userInput}}"
+                autosize
+                use-button-slot
+        >
+            <van-button type="primary" slot="button" round="true" bind:tap="sendMessage">
+                <van-icon name="arrow-up" />
+            </van-button>
+        </van-field>
+    </view>
+</view>

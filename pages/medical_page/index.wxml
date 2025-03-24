@@ -1,0 +1,241 @@
+<view class="chat-container">
+    <!-- Vant侧边栏 -->
+    <van-popup
+            show="{{ showSidebar }}"
+            position="left"
+            custom-class="sidebar-popup"
+            bind:close="toggleSidebar"
+            overlay
+    >
+        <view class="sidebar-header">
+            <text>会话列表</text>
+            <van-icon name="cross" color="#fff" bind:tap="toggleSidebar" />
+        </view>
+
+        <scroll-view scroll-y class="sessions-container">
+            <view
+                    wx:for="{{ sessions }}"
+                    wx:key="session_id"
+                    class="session-item {{ item.session_id === currentSessionId ? 'active' : '' }}"
+                    bind:tap="onSessionChange"
+                    data-session="{{ item }}"
+            >
+                <view class="session-title">{{ item.title || '无标题会话' }}</view>
+                <view class="department-tag {{ !item.suggested_department ? 'no-dept' : '' }}">
+                    {{ item.suggested_department || '未设置科室' }}
+                </view>
+
+                <van-icon
+                        name="delete"
+                        class="delete-icon"
+                        catchtap="deleteSession"
+                        data-id="{{ item.session_id }}"
+                />
+            </view>
+        </scroll-view>
+
+        <view class="sidebar-footer">
+            <van-button type="info" block bind:tap="createNewSession">新建会话</van-button>
+        </view>
+    </van-popup>
+
+    <!-- 修改顶部栏，添加菜单按钮 -->
+    <view class="header">
+
+        <!-- 中间标题 -->
+        <text class="header-title">寻医</text>
+
+        <!-- 右侧功能区 -->
+        <view class="header-right-icons">
+            <!-- 刷新按钮（原新建功能） -->
+            <van-icon name="replay" size="22" class="header-icon-right" bind:tap="createNewSession" />
+
+            <!-- 历史记录按钮（打开侧边栏） -->
+            <van-icon name="underway-o" size="22" class="header-icon-right" bind:tap="toggleSidebar" />
+
+        </view>
+    </view>
+
+    <!-- 聊天内容区 -->
+    <scroll-view
+            scroll-y="true"
+            class="chat-box"
+            scroll-into-view="{{scrollToView}}"
+    >
+        <view class="intro-card" wx:if="{{showIntroCard}}">
+            <view class="intro-header">
+                <image class="intro-avatar" src="/assets/medical.png" />
+                <view class="intro-text">
+                    <view class="intro-title">您好，欢迎咨询健康问题</view>
+                    <view class="intro-subtitle">我是AI健康助手</view>
+                </view>
+                <van-icon name="cross" class="intro-close" bind:tap="closeIntroCard" />
+            </view>
+
+            <view class="intro-content">
+                我学习了海量医学知识，可以解答各类健康问题，支持追问科普内容，能解读医学报告单据，依据患处图片识别皮肤疾病等，欢迎随时向我咨询~
+            </view>
+
+            <view class="quick-questions">
+                <view
+                        wx:for="{{quickQuestions}}"
+                        wx:key="index"
+                        class="quick-question-item"
+                        bind:tap="onQuickQuestionTap"
+                        data-question="{{item}}"
+                >
+                    {{item}}
+                </view>
+            </view>
+        </view>
+        <block wx:for="{{messages}}" wx:key="index">
+            <view class="chat-item {{item.role}}" id="msg-{{index}}">
+                <view class="bubble animated fadeIn">
+                    <!-- 如果是图片消息 -->
+                    <block wx:if="{{item.isImage}}">
+                        <image class="chat-image" src="{{item.imageUrl}}" mode="widthFix" bindtap="previewImage" data-url="{{item.imageUrl}}"></image>
+                        <view class="image-message-text">{{item.content}}</view>
+                    </block>
+                    <!-- Markdown 渲染的消息 -->
+                    <block wx:elif="{{item.role === 'assistant' && item.towxml}}">
+                        <towxml nodes="{{item.towxml}}"/>
+
+                        <!-- 如果是医院列表消息，添加地图按钮 -->
+                        <block wx:if="{{item.isHospitalList}}">
+                            <view class="hospital-actions">
+                                <van-button
+                                        type="primary"
+                                        size="small"
+                                        custom-class="map-button"
+                                        bind:tap="openHospitalMap"
+                                        data-index="0"
+                                >
+                                    查看地图
+                                </van-button>
+
+                                <van-button
+                                        type="info"
+                                        size="small"
+                                        custom-class="hospitals-button"
+                                        bind:tap="viewAllHospitals"
+                                >
+                                    查看更多医院
+                                </van-button>
+                            </view>
+                        </block>
+                    </block>
+                    <!-- 普通文本消息 -->
+                    <block wx:else>
+                        <text user-select="{{true}}">{{item.content}}</text>
+
+                        <!-- 如果是医院列表消息，添加地图按钮 -->
+                        <block wx:if="{{item.isHospitalList}}">
+                            <view class="hospital-actions">
+                                <van-button
+                                        type="primary"
+                                        size="small"
+                                        custom-class="map-button"
+                                        bind:tap="openHospitalMap"
+                                        data-index="0"
+                                >
+                                    查看地图
+                                </van-button>
+
+                                <van-button
+                                        type="info"
+                                        size="small"
+                                        custom-class="hospitals-button"
+                                        bind:tap="viewAllHospitals"
+                                >
+                                    查看更多医院
+                                </van-button>
+                            </view>
+                        </block>
+                    </block>
+                </view>
+            </view>
+        </block>
+
+        <!-- 思考动画单独放在消息列表外部 -->
+        <view class="chat-item assistant" wx:if="{{isThinking}}" id="thinking-animation">
+<!--            <image class="avatar" src="/assets/ai.png" />-->
+            <view class="bubble thinking-bubble">
+                <view class="dot-flashing"></view>
+            </view>
+        </view>
+
+        <!-- 真人医生提示卡片 -->
+        <view class="doctor-card" wx:if="{{showDoctorCard}}" id="doctor-card">
+            <view class="doctor-card-header">
+                <image class="doctor-avatar" src="/assets/doctor1.png" />
+                <view class="doctor-header-text">
+                    <view class="doctor-title">需要更专业的解答？</view>
+                    <view class="doctor-subtitle">我们有专业医生为您提供一对一咨询服务</view>
+                </view>
+                <van-icon name="cross" class="doctor-card-close" bind:tap="closeDoctorCard" />
+            </view>
+
+            <view class="doctor-card-content">
+                如果您的问题比较复杂或需要更准确的医疗建议，可以选择咨询我们的专业医生团队。他们将为您提供更个性化的医疗建议。
+            </view>
+
+            <view class="doctor-card-footer">
+                <van-button type="primary" block bind:tap="navigateToDoctor" custom-class="doctor-btn">咨询真人医生</van-button>
+            </view>
+        </view>
+        <view class="bottom-anchor" id="bottom-anchor" style="height: 80rpx; "></view>
+    </scroll-view>
+
+    <!-- 底部输入区域 -->
+    <view class="input-area">
+        <!-- 输入框单独一行 -->
+        <van-field class="input-text" placeholder="请输入您的问题"
+                   bind:change="onInputChange" model:value="{{userInput}}" autosize use-button-slot>
+            <van-button type="info" slot="button" round="true" bind:tap="sendMessage">
+                <van-icon name="arrow-up" />
+            </van-button>
+        </van-field>
+
+        <!-- 下方控制区域 -->
+        <view class="bottom-controls">
+            <!-- 使用Vant的Cell替代原生picker -->
+            <van-cell
+                    title="{{ selectedDept ? '当前科室：' + selectedDept : '选择科室（推荐）' }}"
+                    is-link
+                    arrow-direction="down"
+                    bind:click="showDeptPopup"
+                    custom-class="dept-cell"
+                    title-class="dept-cell-title"
+            />
+
+            <van-button type="info" round icon="plus" class="add-button" bind:tap="onAddButtonTap" />
+        </view>
+    </view>
+
+    <!-- 科室选择弹出层 -->
+    <van-popup
+            show="{{ showDeptPopup }}"
+            position="bottom"
+            round
+            custom-class="dept-popup"
+            bind:close="onCloseDeptPopup"
+    >
+        <view class="popup-header">
+            <text>选择科室</text>
+            <van-icon name="cross" bind:tap="onCloseDeptPopup" />
+        </view>
+
+        <view class="dept-grid">
+            <van-grid column-num="3" border="{{ false }}">
+                <van-grid-item
+                        wx:for="{{ departments }}"
+                        wx:key="*this"
+                        text="{{ item }}"
+                        bind:click="selectDepartment"
+                        data-index="{{ index }}"
+                        custom-class="{{ selectedDeptIndex === index ? 'dept-item-active' : 'dept-item' }}"
+                />
+            </van-grid>
+        </view>
+    </van-popup>
+</view>

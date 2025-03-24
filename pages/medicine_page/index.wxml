@@ -1,0 +1,121 @@
+<view class="medicine-container">
+    <!-- 侧边栏 -->
+    <van-popup
+            show="{{ showSidebar }}"
+            position="left"
+            custom-class="sidebar-popup"
+            bind:close="toggleSidebar"
+            overlay
+    >
+        <view class="sidebar-header">
+            <text>历史咨询</text>
+            <van-icon name="cross" color="#fff" bind:tap="toggleSidebar" />
+        </view>
+
+        <scroll-view scroll-y class="sessions-container">
+            <view
+                    wx:for="{{ sessions }}"
+                    wx:key="session_id"
+                    class="session-item {{ item.session_id === currentSessionId ? 'active' : '' }}"
+                    bind:tap="onSessionChange"
+                    data-id="{{ item.session_id }}"
+            >
+                <view class="session-title">{{ item.title || '无标题咨询' }}</view>
+                <van-icon
+                        name="delete"
+                        class="delete-icon"
+                        catchtap="deleteSession"
+                        data-id="{{ item.session_id }}"
+                />
+            </view>
+        </scroll-view>
+
+        <view class="sidebar-footer">
+            <van-button type="info" block bind:tap="createNewSession" custom-class="create-btn">新建咨询</van-button>
+        </view>
+    </van-popup>
+
+    <!-- 顶部导航栏 -->
+    <view class="header">
+        <text class="header-title">智能问药</text>
+        <view class="header-right-icons">
+            <van-icon name="replay" size="22" class="header-icon-right" bind:tap="createNewSession" />
+            <van-icon name="underway-o" size="22" class="header-icon-right" bind:tap="toggleSidebar" />
+        </view>
+    </view>
+
+    <!-- 聊天内容区 -->
+    <scroll-view
+            scroll-y="true"
+            class="chat-box"
+            scroll-into-view="{{scrollToView}}"
+    >
+        <!-- 介绍卡片 -->
+        <view class="medicine-intro" wx:if="{{showMedicineIntro}}">
+            <view class="intro-header">
+                <image class="intro-avatar" src="/assets/medicine.png" />
+                <view class="intro-text">
+                    <view class="intro-title">您好，欢迎使用智能问药</view>
+                    <view class="intro-subtitle">我可以解答您关于药品的问题</view>
+                </view>
+                <van-icon name="cross" class="intro-close" bind:tap="closeMedicineIntro" />
+            </view>
+
+            <view class="intro-content">
+                我可以为您提供药品的基本信息、用法用量、注意事项、副作用等知识，帮助您合理用药。请注意：我提供的信息仅供参考，具体用药请遵医嘱。
+            </view>
+
+            <view class="quick-questions">
+                <view
+                        wx:for="{{quickQuestions}}"
+                        wx:key="index"
+                        class="quick-question-item"
+                        bind:tap="onQuickQuestionTap"
+                        data-question="{{item}}"
+                >
+                    {{item}}
+                </view>
+            </view>
+        </view>
+
+        <!-- 聊天消息 -->
+        <block wx:for="{{messages}}" wx:key="index">
+            <view class="chat-item {{item.role}}" id="msg-{{index}}">
+                <view class="bubble animated fadeIn">
+                    <block wx:if="{{item.role === 'assistant' && item.towxml}}">
+                        <towxml nodes="{{item.towxml}}"/>
+                    </block>
+                    <!-- 普通文本 -->
+                    <block wx:else>
+                        {{item.content}}
+                    </block>
+                </view>
+            </view>
+        </block>
+
+        <!-- 思考动画 -->
+        <view class="chat-item assistant" wx:if="{{isThinking}}" id="thinking-animation">
+<!--            <image class="avatar" src="/assets/medicine.png" />-->
+            <view class="bubble thinking-bubble">
+                <view class="dot-flashing"></view>
+            </view>
+        </view>
+        <view class="bottom-anchor" id="bottom-anchor" style="height: 80rpx; "></view>
+    </scroll-view>
+
+    <!-- 底部输入区域 -->
+    <view class="input-area">
+        <van-field
+                class="input-text"
+                placeholder="请输入您对药品的疑问"
+                bind:change="onInputChange"
+                model:value="{{userInput}}"
+                autosize
+                use-button-slot
+        >
+            <van-button type="info" slot="button" round="true" bind:tap="sendMessage">
+                <van-icon name="arrow-up" />
+            </van-button>
+        </van-field>
+    </view>
+</view>

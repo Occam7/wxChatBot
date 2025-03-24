@@ -1,0 +1,354 @@
+/* 全局风格 - 问药主题 */
+.medicine-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f8f6ff; /* 浅紫色背景 */
+}
+
+/* 顶部导航栏样式 */
+.header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16rpx 32rpx;
+    background-color: #7546c9; /* 紫色主题 */
+    color: #fff;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.header-icon-left {
+    color: #fff;
+}
+
+.header-title {
+    text-align: center;
+    color: #fff;
+    margin-left: 20rpx;
+}
+
+.header-right-icons {
+    display: flex;
+    align-items: center;
+}
+
+.header-icon-right {
+    margin-left: 24rpx;
+    color: #fff;
+}
+
+/* 聊天内容区 */
+.chat-box {
+    flex: 1;
+    padding: 20rpx;
+    overflow-y: scroll;
+}
+
+/* 问药介绍卡片 */
+.medicine-intro {
+    margin: 20rpx 0;
+    padding: 30rpx;
+    background-color: #f0e6ff; /* 浅紫色背景 */
+    border-radius: 20rpx;
+    box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+    position: relative;
+    left: -22rpx;
+    border: 2rpx solid #d4c6ff;
+}
+
+.intro-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20rpx;
+}
+
+.intro-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro-title {
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 6rpx;
+}
+
+.intro-subtitle {
+    font-size: 28rpx;
+    color: #7546c9; /* 紫色 */
+}
+
+.intro-close {
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+    font-size: 32rpx;
+    color: #999;
+}
+
+.intro-content {
+    font-size: 28rpx;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 30rpx;
+}
+
+.quick-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 16rpx;
+}
+
+.quick-question-item {
+    padding: 16rpx 24rpx;
+    background-color: #fff;
+    border-radius: 10rpx;
+    font-size: 28rpx;
+    color: #7546c9; /* 紫色 */
+    border: 1rpx solid #d4c6ff;
+    text-align: left;
+}
+
+.quick-question-item:active {
+    background-color: #efe6ff;
+}
+
+/* 聊天气泡 */
+.chat-item {
+    display: flex;
+    margin-bottom: 20rpx;
+    animation: fadeIn 0.4s ease-in;
+}
+
+.chat-item.user {
+    flex-direction: row-reverse;
+}
+
+.avatar {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+    margin: 0 16rpx;
+}
+
+.bubble {
+    max-width: 70%;
+    padding: 20rpx;
+    border-radius: 20rpx;
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.chat-item.user .bubble {
+    background-color: #e9dfff; /* 浅紫色 */
+}
+
+/* 思考动画 */
+.thinking-bubble {
+    padding: 24rpx 40rpx;
+    min-height: 20rpx;
+    display: flex;
+    align-items: center;
+}
+
+.dot-flashing {
+    position: relative;
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    background-color: #7546c9; /* 紫色 */
+    color: #7546c9;
+    animation: dot-flashing 1s infinite linear alternate;
+    animation-delay: 0.5s;
+}
+
+.dot-flashing::before, .dot-flashing::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+}
+
+.dot-flashing::before {
+    left: -28rpx;
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    background-color: #7546c9;
+    color: #7546c9;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 0s;
+}
+
+.dot-flashing::after {
+    left: 28rpx;
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    background-color: #7546c9;
+    color: #7546c9;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 1s;
+}
+
+@keyframes dot-flashing {
+    0% {
+        background-color: #7546c9;
+    }
+    50%, 100% {
+        background-color: rgba(117, 70, 201, 0.2);
+    }
+}
+
+/* 输入区域 */
+.input-area {
+    padding: 12rpx;
+    border-top: 1rpx solid #e0e0e0;
+    background-color: #ffffff;
+}
+
+/* Vant组件覆盖样式 */
+.van-button--info {
+    background-color: #7546c9 !important;
+    border-color: #7546c9 !important;
+}
+
+/* 侧边栏样式 */
+.sidebar-popup {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30rpx;
+    border-bottom: 1rpx solid #eee;
+    background-color: #7546c9; /* 紫色主题 */
+    color: #fff;
+}
+
+.sidebar-header text {
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.sessions-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.session-item {
+    position: relative;
+    padding: 30rpx;
+    border-bottom: 1rpx solid #f5f5f5;
+    transition: background-color 0.3s;
+}
+
+.session-item.active {
+    background-color: #f2f0ff;
+    border-left: 8rpx solid #7546c9;
+}
+
+.session-title {
+    font-weight: 500;
+    margin-bottom: 12rpx;
+    font-size: 30rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.delete-icon {
+    position: absolute;
+    right: 30rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    padding: 20rpx;
+}
+
+.sidebar-footer {
+    padding: 30rpx;
+    border-top: 1rpx solid #eee;
+}
+
+.create-btn {
+    background-color: #7546c9 !important;
+    border-color: #7546c9 !important;
+    color: white !important;
+}
+
+.animated.fadeIn {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20rpx);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* towxml 内容样式调整 */
+.bubble .h2w {
+    font-size: 28rpx;
+    line-height: 1.6;
+    word-break: break-all;
+}
+
+.bubble .h2w view {
+    margin: 0;
+}
+
+.bubble .h2w__h3 {
+    font-size: 32rpx;
+    margin: 8rpx 0;
+    font-weight: bold;
+    color: #0084ff;
+}
+
+.bubble .h2w__ul,
+.bubble .h2w__ol {
+    padding-left: 24rpx;
+    margin: 8rpx 0;
+}
+
+.bubble .h2w__li {
+    margin: 4rpx 0;
+}
+
+.bubble .h2w__strong {
+    font-weight: bold;
+    color: #333;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20rpx;
+    overflow-y: scroll;
+    margin-bottom: 120rpx;
+    -webkit-overflow-scrolling: touch; /* 增强iOS滚动体验 */
+}
+.bottom-anchor {
+    height: 80rpx;
+    width: 100%;
+    clear: both;
+}

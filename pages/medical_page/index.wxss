@@ -1,0 +1,646 @@
+/* 全局风格 */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f6f8fa;
+}
+
+/* 调整顶部导航栏样式 */
+.header {
+    position: relative;
+    display: flex;
+    justify-content: space-between; /* 左中右布局 */
+    align-items: center;
+    padding: 16rpx 32rpx;
+    background-color: #007aff; /* 浅绿/灰背景色 */
+    color: #fff;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.header-icon-left {
+    color: #fff;
+}
+
+.header-title {
+    text-align: center;
+    color: #fff;
+    margin-left: 20rpx;
+}
+
+.header-right-icons {
+    display: flex;
+    align-items: center;
+}
+
+.header-icon-right {
+    margin-left: 24rpx;
+    color: #fff;
+}
+
+.circle-button {
+    width: 44rpx;
+    height: 44rpx;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 24rpx;
+}
+
+/* 图片消息样式 */
+.chat-image {
+    max-width: 200px;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-message-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* 修改服务提供商区域样式 */
+.service-provider {
+    display: flex;
+    align-items: center;
+    padding: 10rpx 24rpx;
+    background-color: #fff;
+    border-bottom: 1rpx solid #eee;
+    font-size: 24rpx;
+    color: #666;
+}
+
+.provider-logo {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+}
+
+.provider-separator {
+    margin: 0 10rpx;
+    color: #ddd;
+}
+
+/* 聊天内容 */
+.chat-box {
+    flex: 1;
+    padding: 20rpx;
+    overflow: scroll;
+}
+
+.chat-item {
+    display: flex;
+    margin-bottom: 20rpx;
+    animation: fadeIn 0.4s ease-in;
+}
+.chat-item.user {
+    flex-direction: row-reverse;
+}
+.avatar {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+    margin: 0 16rpx;
+}
+.bubble {
+    max-width: 60%;
+    padding: 20rpx;
+    border-radius: 20rpx;
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+.chat-item.user .bubble {
+    background-color: #daf1ff;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column; /* 改为纵向排列 */
+    padding: 12rpx;
+    border-top: 1rpx solid #e0e0e0;
+    background-color: #ffffff;
+}
+
+.input-text {
+    width: 95%; /* 占满整行 */
+    margin-bottom: 12rpx; /* 增加下边距 */
+    border: none;
+    padding: 10rpx;
+    font-size: 28rpx;
+    background-color: #f7f7f7;
+    border-radius: 20rpx;
+}
+
+.bottom-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 两端对齐 */
+    padding: 0 10rpx;
+}
+
+/* 保持按钮样式 */
+.van-button {
+    margin-left: auto; /* 按钮靠右 */
+}
+
+/* 动画 */
+.animated.fadeIn {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20rpx);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Vant Sidebar 样式 */
+.sidebar-popup {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30rpx;
+    border-bottom: 1rpx solid #eee;
+    background-color: #007aff;
+    color: #fff;
+}
+
+.sidebar-header text {
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.sessions-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.session-item {
+    position: relative;
+    padding: 30rpx;
+    border-bottom: 1rpx solid #f5f5f5;
+    transition: background-color 0.3s;
+}
+
+.session-item.active {
+    background-color: #f2f8ff;
+    border-left: 8rpx solid #1989fa;
+}
+
+.session-title {
+    font-weight: 500;
+    margin-bottom: 12rpx;
+    font-size: 30rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.department-tag {
+    font-size: 24rpx;
+    background-color: #e6f4ff;
+    color: #1677ff;
+    padding: 4rpx 16rpx;
+    border-radius: 24rpx;
+    display: inline-block;
+}
+
+.department-tag.no-dept {
+    color: #999;
+    background-color: #f5f5f5;
+}
+
+.delete-icon {
+    position: absolute;
+    right: 30rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    padding: 20rpx;
+}
+
+.sidebar-footer {
+    padding: 30rpx;
+    border-top: 1rpx solid #eee;
+}
+
+.create-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #007aff;
+    color: white;
+    border-radius: 8rpx;
+    font-size: 28rpx;
+    padding: 20rpx 0;
+}
+
+/* 思考中动画相关样式 */
+.thinking-bubble {
+    padding: 24rpx 40rpx;
+    min-height: 20rpx;
+    display: flex;
+    align-items: center;
+}
+
+.dot-flashing {
+    position: relative;
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    background-color: #007aff;
+    color: #007aff;
+    animation: dot-flashing 1s infinite linear alternate;
+    animation-delay: 0.5s;
+}
+
+.dot-flashing::before, .dot-flashing::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+}
+
+.dot-flashing::before {
+    left: -28rpx;
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    background-color: #007aff;
+    color: #007aff;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 0s;
+}
+
+.dot-flashing::after {
+    left: 28rpx;
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    background-color: #007aff;
+    color: #007aff;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 1s;
+}
+
+@keyframes dot-flashing {
+    0% {
+        background-color: #007aff;
+    }
+    50%, 100% {
+        background-color: rgba(0, 122, 255, 0.2);
+    }
+}
+
+/* 科室选择器新样式 */
+.dept-cell {
+    flex: 1;
+    margin-right: 20rpx;
+    border-radius: 40rpx;
+    overflow: hidden;
+    background-color: #e6f0ff !important;
+    border: 1rpx solid #007aff;
+    --cell-vertical-padding: 10rpx;
+    --cell-horizontal-padding: 24rpx;
+    --cell-line-height: 56rpx;
+    height: 72rpx;
+}
+
+.dept-cell-title {
+    color: #007aff;
+    font-size: 28rpx;
+    font-weight: 500;
+}
+
+.add-button {
+    width: 72rpx !important;
+    height: 72rpx !important;
+    padding: 0 !important;
+    --button-round-border-radius: 50%;
+    --button-default-height: 72rpx;
+    --button-line-height: 72rpx;
+}
+
+.dept-popup {
+    max-height: 70vh;
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30rpx;
+    border-bottom: 1rpx solid #eee;
+}
+
+.popup-header text {
+    font-size: 32rpx;
+    font-weight: 500;
+}
+
+.dept-grid {
+    padding: 20rpx;
+}
+
+.dept-item {
+    --grid-item-content-padding: 20rpx 0;
+}
+
+.dept-item-active {
+    --grid-item-content-padding: 20rpx 0;
+    color: #007aff;
+    font-weight: 500;
+    background-color: #f0f9ff;
+}
+
+/* 介绍卡片样式 */
+.intro-card {
+    margin: 20rpx;
+    padding: 30rpx;
+    background-color: #f0faff;
+    border-radius: 20rpx;
+    box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+    position: relative;
+    left: -20rpx;
+    border: 2rpx solid #e6f4ff;
+}
+
+.intro-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20rpx;
+}
+
+.intro-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro-title {
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 6rpx;
+}
+
+.intro-subtitle {
+    font-size: 28rpx;
+    color: #0084ff;
+}
+
+.intro-close {
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+    font-size: 32rpx;
+    color: #999;
+}
+
+.intro-content {
+    font-size: 28rpx;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 30rpx;
+}
+
+.quick-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 16rpx;
+}
+
+.quick-question-item {
+    padding: 16rpx 24rpx;
+    background-color: #fff;
+    border-radius: 10rpx;
+    font-size: 28rpx;
+    color: #0084ff;
+    border: 1rpx solid #e0e0ff;
+    text-align: left;
+}
+
+.quick-question-item:active {
+    background-color: #e6f4ff;
+}
+
+/* 添加医院按钮样式 */
+.hospital-actions {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.map-button {
+    border-radius: 20px !important;
+}
+
+.hospitals-button {
+    border-radius: 20px !important;
+}
+
+/* 医院列表样式 */
+.hospital-card {
+    margin: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.hospital-header {
+    background-color: #f6f6f6;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.hospital-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.hospital-rating {
+    display: flex;
+    align-items: center;
+    color: #ff9800;
+}
+
+.hospital-content {
+    padding: 15px;
+}
+
+.hospital-info {
+    margin-bottom: 8px;
+    display: flex;
+}
+
+.info-label {
+    color: #999;
+    width: 70px;
+    flex-shrink: 0;
+}
+
+.info-value {
+    color: #333;
+    flex: 1;
+}
+
+.hospital-actions-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* 添加医生卡片样式 */
+.doctor-card {
+    margin: 20rpx;
+    border-radius: 16rpx;
+    background-color: #fff;
+    box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.doctor-card-header {
+    display: flex;
+    align-items: center;
+    padding: 20rpx;
+    background-color: #3f72af;
+    position: relative;
+}
+
+.doctor-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    margin-right: 16rpx;
+    border: 2rpx solid #fff;
+}
+
+.doctor-header-text {
+    flex: 1;
+}
+
+.doctor-title {
+    font-size: 32rpx;
+    color: #fff;
+    font-weight: 500;
+}
+
+.doctor-subtitle {
+    font-size: 24rpx;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 4rpx;
+}
+
+.doctor-card-close {
+    position: absolute;
+    top: 16rpx;
+    right: 16rpx;
+    color: #fff;
+}
+
+.doctor-card-content {
+    padding: 24rpx;
+    font-size: 28rpx;
+    color: #333;
+    line-height: 1.6;
+}
+
+.doctor-card-footer {
+    padding: 0 24rpx 24rpx;
+}
+
+.doctor-btn {
+    border-radius: 40rpx !important;
+    height: 80rpx !important;
+    font-size: 28rpx !important;
+    background-color: #3f72af !important;
+    border: none !important;
+    box-shadow: 0 2rpx 8rpx rgba(63, 114, 175, 0.3);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20rpx);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* towxml 内容样式调整 */
+.bubble .h2w {
+    font-size: 28rpx;
+    line-height: 1.6;
+    word-break: break-all;
+}
+
+.bubble .h2w view {
+    margin: 0;
+}
+
+.bubble .h2w__h3 {
+    font-size: 32rpx;
+    margin: 8rpx 0;
+    font-weight: bold;
+    color: #0084ff;
+}
+
+.bubble .h2w__ul,
+.bubble .h2w__ol {
+    padding-left: 24rpx;
+    margin: 8rpx 0;
+}
+
+.bubble .h2w__li {
+    margin: 4rpx 0;
+}
+
+.bubble .h2w__strong {
+    font-weight: bold;
+    color: #333;
+}
+.chat-box {
+    flex: 1;
+    padding: 20rpx;
+    overflow-y: scroll;
+    margin-bottom: 120rpx;
+    -webkit-overflow-scrolling: touch; /* 增强iOS滚动体验 */
+}
+.bottom-anchor {
+    height: 80rpx;
+    width: 100%;
+    clear: both;
+}
