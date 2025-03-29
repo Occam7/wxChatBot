@@ -3,20 +3,19 @@
 
 App({
   onLaunch() {
-    // 展示本地存储能力
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
+    wx.cloud.init({
+      env: 'cloudbase-3g9rr1yt5a315552',
+      traceUser: true,
     })
+
+    const userInfo = wx.getStorageSync('userInfo')
+    this.globalData.userInfo = userInfo || null
+    this.globalData.hasUserInfo = !!userInfo
   },
   towxml: require('/towxml/index'),
   globalData: {
     userInfo: null,
-    BASE_URL: 'http://127.0.0.1:8000'
+    hasUserInfo: false,
+    BASE_URL: 'http://121.199.174.211:8000'
   }
 })

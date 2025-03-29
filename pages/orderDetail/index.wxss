@@ -1,0 +1,277 @@
+/* order-detail/index.wxss */
+.order-detail-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 120px;
+}
+
+.nav-bar {
+  background-color: #00C853 !important;
+}
+
+.nav-bar .van-nav-bar__title {
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.nav-bar .van-nav-bar__text {
+  color: white !important;
+}
+
+.nav-bar .van-icon {
+  color: white !important;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.loading-text {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #999;
+}
+
+.section {
+  margin: 12px 16px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 8px;
+}
+
+/* 订单状态 */
+.status-section {
+  margin: 12px 16px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.status-icon {
+  margin-bottom: 12px;
+}
+
+.status-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 订单信息 */
+.order-info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.order-info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  color: #666;
+  font-size: 14px;
+}
+
+.info-value {
+  color: #333;
+  font-size: 14px;
+}
+
+.order-id {
+  display: flex;
+  align-items: center;
+}
+
+.copy-btn {
+  margin-left: 8px;
+  height: 24px !important;
+  font-size: 12px !important;
+  padding: 0 8px !important;
+}
+
+/* 地址信息 */
+.address-info {
+  padding: 8px 0;
+}
+
+.address-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 12px;
+}
+
+.phone {
+  font-size: 14px;
+  color: #666;
+}
+
+.address-detail {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* 商品列表 */
+.order-items {
+  margin-top: 12px;
+}
+
+.order-item {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  margin-right: 12px;
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-title {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.item-price-qty {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-price {
+  font-size: 16px;
+  color: #FF5252;
+  font-weight: bold;
+}
+
+.item-qty {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 价格信息 */
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.total {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
+  margin-top: 4px;
+  font-weight: bold;
+  color: #333;
+}
+
+.total-price {
+  color: #FF5252;
+  font-size: 16px;
+}
+
+/* 发票信息 */
+.invoice-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.invoice-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 备注信息 */
+.remark {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* 空数据状态 */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.empty-text {
+  margin-top: 12px;
+  font-size: 16px;
+  color: #999;
+}
+
+/* 底部区域 */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 12px 16px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.footer-actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.action-btn {
+  margin: 0 6px !important;
+  border-color: #ddd !important;
+  color: #666 !important;
+}
+
+.primary-btn {
+  margin: 0 6px !important;
+  flex: 1.5;
+  background-color: #00C853 !important;
+  border-color: #00C853 !important;
+  color: white !important;
+}

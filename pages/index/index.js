@@ -248,6 +248,18 @@ Page({
     this.switchServiceAndNavigate('health', '/pages/health_page/index')
   },
 
+  navigateToUserCenter: function() {
+    wx.navigateTo({ 
+      url: '/pages/personalCenter/index'
+    });
+  },
+
+  navigateToHerbalShop: function() {
+    wx.navigateTo({ 
+      url: '/pages/shop/index'
+    });
+  },
+
   // 通用服务切换导航方法
   switchServiceAndNavigate: function(serviceType, path) {
     const type = serviceType.toLowerCase();

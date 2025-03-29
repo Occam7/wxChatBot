@@ -1,0 +1,111 @@
+<!-- login/index.wxml -->
+<view class="login-container">
+  <!-- 顶部Logo和标题 -->
+  <view class="login-header">
+    <image class="logo" src="/images/logo.png" mode="aspectFit"></image>
+    <view class="title">医疗助手</view>
+    <view class="subtitle">您的健康贴心管家</view>
+  </view>
+
+  <!-- 登录方式切换 -->
+  <view class="login-tabs">
+    <view class="tab {{ loginType === 'wechat' ? 'active' : '' }}" bindtap="switchLoginType" data-type="wechat">
+      微信登录
+    </view>
+    <view class="tab {{ loginType === 'phone' ? 'active' : '' }}" bindtap="switchLoginType" data-type="phone">
+      手机号登录
+    </view>
+  </view>
+
+  <!-- 登录表单区域 -->
+  <view class="login-form">
+    <!-- 微信登录 -->
+    <block wx:if="{{ loginType === 'wechat' }}">
+      <view class="wechat-login-container">
+        <button 
+          class="wechat-login-btn" 
+          bindtap="wechatLogin"
+          loading="{{ isLoading }}"
+        >
+          <van-icon name="wechat" size="24px" color="#fff" />
+          <text>微信一键登录</text>
+        </button>
+        <view class="wechat-login-tips">授权后将获取您的微信昵称、头像等信息</view>
+      </view>
+    </block>
+
+    <!-- 手机号登录 -->
+    <block wx:else>
+      <view class="phone-login-container">
+        <van-cell-group>
+          <van-field
+            value="{{ phoneNumber }}"
+            placeholder="请输入手机号"
+            border="{{ false }}"
+            bind:change="onPhoneInput"
+            type="number"
+            maxlength="11"
+            clearable
+            left-icon="phone-o"
+          />
+          
+          <van-field
+            placeholder="请输入验证码"
+            border="{{ false }}"
+            type="number"
+            maxlength="6"
+            clearable
+            left-icon="comment-o"
+            use-button-slot
+          >
+            <van-button slot="button" size="small" type="primary" bind:click="getVerifyCode">
+              获取验证码
+            </van-button>
+          </van-field>
+        </van-cell-group>
+
+        <button 
+          class="phone-login-btn" 
+          bindtap="phoneLogin"
+          loading="{{ isLoading }}"
+        >
+          登录
+        </button>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部协议说明 -->
+  <view class="login-footer">
+    <text>登录即表示同意</text>
+    <text class="agreement-link">《用户服务协议》</text>
+    <text>和</text>
+    <text class="agreement-link">《隐私政策》</text>
+  </view>
+  
+  <!-- 新增的确认弹窗 -->
+  <van-popup show="{{ showConfirmPopup }}" round position="center" custom-style="width: 80%; padding: 20px;">
+    <view class="confirm-popup">
+      <view class="confirm-title">授权确认</view>
+      
+      <view class="user-info-preview" wx:if="{{tempUserInfo}}">
+        <image class="avatar-preview" src="{{tempUserInfo.avatarUrl}}" mode="aspectFill"></image>
+        <view class="nickname-preview">{{tempUserInfo.nickName}}</view>
+      </view>
+      
+      <view class="confirm-option">
+        <view class="option-label">是否使用微信头像和昵称</view>
+        <switch checked="{{useWechatInfo}}" bindchange="toggleUseWechatInfo" color="#1989fa"/>
+      </view>
+      
+      <view class="confirm-tip">
+        <text>{{useWechatInfo ? '将使用您的微信头像和昵称' : '将使用默认头像和随机昵称'}}</text>
+      </view>
+      
+      <view class="confirm-buttons">
+        <button class="cancel-btn" bindtap="closeConfirmPopup">取消</button>
+        <button class="confirm-btn" bindtap="confirmWechatLogin" loading="{{isLoading}}">确认</button>
+      </view>
+    </view>
+  </van-popup>
+</view>

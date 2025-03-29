@@ -10,6 +10,48 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/orderDetail/index",
+          "pathName": "pages/orderDetail/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/checkout/index",
+          "pathName": "pages/checkout/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "components/address-form/index",
+          "pathName": "components/address-form/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/checkout/index",
+          "pathName": "pages/checkout/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/shop/index",
+          "pathName": "pages/shop/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/personal_center/index",
+          "pathName": "pages/personal_center/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/doctor/index",
           "pathName": "pages/doctor/index",
           "query": "",

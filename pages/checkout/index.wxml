@@ -1,0 +1,247 @@
+<!-- 结算页面 WXML -->
+<view class="checkout-container">
+  <!-- 顶部导航栏 -->
+  <van-nav-bar
+    title="订单结算"
+    left-text="返回"
+    left-arrow
+    bind:click-left="onClickBack"
+    custom-class="nav-bar"
+  />
+  
+  <!-- 地址选择 -->
+  <view class="section address-section" bind:tap="chooseAddress">
+    <block wx:if="{{address}}">
+      <view class="address-info">
+        <view class="address-top">
+          <view class="name-phone">
+            <text class="name">{{address.name}}</text>
+            <text class="phone">{{address.phone}}</text>
+          </view>
+          <van-icon name="arrow" color="#999" />
+        </view>
+        <view class="address-detail">{{address.province}}{{address.city}}{{address.district}}{{address.detail}}</view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="address-empty">
+        <van-icon name="location-o" size="22px" color="#00C853" />
+        <text>请选择收货地址</text>
+        <van-icon name="arrow" color="#999" />
+      </view>
+    </block>
+  </view>
+  
+  <!-- 订单信息 -->
+  <view class="section order-section">
+    <view class="section-title">
+      <van-icon name="shop-o" size="18px" color="#00C853" />
+      <text>百草堂中药</text>
+    </view>
+    
+    <!-- 商品列表 -->
+    <view class="order-items">
+      <view class="order-item" wx:for="{{cartItems}}" wx:key="id">
+        <image class="item-image" src="{{item.thumb}}" mode="aspectFill"></image>
+        <view class="item-info">
+          <view class="item-title">{{item.title}}</view>
+          <view class="item-price-qty">
+            <text class="item-price">¥{{item.price}}</text>
+            <text class="item-qty">×{{item.quantity}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 配送方式 -->
+    <view class="delivery-method">
+      <text>配送方式</text>
+      <view class="delivery-value">
+        <text>{{deliveryMethodText}}</text>
+        <van-icon name="arrow" color="#999" bind:tap="showDeliveryPopup" />
+      </view>
+    </view>
+    
+    <!-- 订单备注 -->
+    <view class="order-remark">
+      <text>订单备注</text>
+      <view class="remark-input">
+        <van-field
+          value="{{ remark }}"
+          placeholder="选填：对本次交易的说明"
+          border="{{ false }}"
+          bind:change="onRemarkChange"
+          maxlength="50"
+          input-class="remark-input-field"
+        />
+      </view>
+    </view>
+    
+    <!-- 商品金额 -->
+    <view class="order-amount">
+      <text>商品金额</text>
+      <text class="amount-value">¥{{totalPrice}}</text>
+    </view>
+    
+    <!-- 运费 -->
+    <view class="order-freight">
+      <text>运费</text>
+      <text class="freight-value">{{freight > 0 ? '¥' + freight : '免运费'}}</text>
+    </view>
+  </view>
+  
+  <!-- 支付方式 -->
+  <view class="section payment-section">
+    <view class="section-title">支付方式</view>
+    <van-radio-group value="{{ paymentMethod }}" bind:change="onPaymentChange">
+      <van-cell-group border="{{false}}">
+        <van-cell
+          title="微信支付"
+          clickable
+          data-name="wechat"
+          bind:click="onPaymentCellClick"
+          title-class="payment-title"
+        >
+          <view slot="icon" class="payment-icon">
+            <van-icon name="wechat" color="#00C853" size="20px" />
+          </view>
+          <van-radio slot="right-icon" name="wechat" checked-color="#00C853" />
+        </van-cell>
+        <van-cell
+          title="货到付款"
+          clickable
+          data-name="cod"
+          bind:click="onPaymentCellClick"
+          title-class="payment-title"
+        >
+          <view slot="icon" class="payment-icon">
+            <van-icon name="cash-back-record" color="#00C853" size="20px" />
+          </view>
+          <van-radio slot="right-icon" name="cod" checked-color="#00C853" />
+        </van-cell>
+      </van-cell-group>
+    </van-radio-group>
+  </view>
+  
+  <!-- 发票信息 -->
+  <view class="section invoice-section">
+    <van-cell
+      title="发票信息"
+      value="{{invoiceTitle ? invoiceTitle : '不开发票'}}"
+      is-link
+      bind:click="showInvoicePopup"
+      title-class="invoice-title"
+      value-class="invoice-value"
+    />
+  </view>
+  
+  <!-- 底部提交栏 -->
+  <view class="submit-bar-placeholder"></view>
+  <van-submit-bar
+    price="{{ totalAmount * 100 }}"
+    button-text="提交订单"
+    bind:submit="onSubmitOrder"
+    custom-class="submit-bar"
+    button-class="submit-button"
+    loading="{{submitting}}"
+  >
+    <view slot="tip">
+      {{cartItems.length}}件商品，总计：¥{{totalAmount}}
+    </view>
+  </van-submit-bar>
+  
+  <!-- 配送方式弹出层 -->
+  <van-popup
+    show="{{ showDeliveryPopup }}"
+    position="bottom"
+    round
+    bind:close="onCloseDeliveryPopup"
+  >
+    <view class="popup-title">配送方式</view>
+    <van-radio-group value="{{ deliveryMethod }}" bind:change="onDeliveryChange">
+      <van-cell-group border="{{false}}">
+        <van-cell
+          title="快递配送"
+          clickable
+          data-name="express"
+          bind:click="onDeliveryCellClick"
+        >
+          <van-radio slot="right-icon" name="express" checked-color="#00C853" />
+        </van-cell>
+        <van-cell
+          title="到店自取"
+          clickable
+          data-name="self"
+          bind:click="onDeliveryCellClick"
+        >
+          <van-radio slot="right-icon" name="self" checked-color="#00C853" />
+        </van-cell>
+      </van-cell-group>
+    </van-radio-group>
+    <view class="popup-bottom">
+      <van-button
+        type="primary"
+        block
+        round
+        custom-class="popup-button"
+        bind:click="onCloseDeliveryPopup"
+      >确定</van-button>
+    </view>
+  </van-popup>
+  
+  <!-- 发票弹出层 -->
+  <van-popup
+    show="{{ showInvoicePopup }}"
+    position="bottom"
+    round
+    bind:close="onCloseInvoicePopup"
+  >
+    <view class="popup-title">发票信息</view>
+    <van-radio-group value="{{ needInvoice ? 'yes' : 'no' }}" bind:change="onInvoiceTypeChange">
+      <van-cell-group border="{{false}}">
+        <van-cell
+          title="不开发票"
+          clickable
+          data-name="no"
+          bind:click="onInvoiceCellClick"
+        >
+          <van-radio slot="right-icon" name="no" checked-color="#00C853" />
+        </van-cell>
+        <van-cell
+          title="开具发票"
+          clickable
+          data-name="yes"
+          bind:click="onInvoiceCellClick"
+        >
+          <van-radio slot="right-icon" name="yes" checked-color="#00C853" />
+        </van-cell>
+      </van-cell-group>
+    </van-radio-group>
+    
+    <block wx:if="{{needInvoice}}">
+      <van-field
+        label="发票抬头"
+        value="{{ invoiceTitle }}"
+        placeholder="请输入发票抬头"
+        bind:change="onInvoiceTitleChange"
+        required
+      />
+      <van-field
+        label="纳税人识别号"
+        value="{{ invoiceTaxNumber }}"
+        placeholder="请输入纳税人识别号"
+        bind:change="onInvoiceTaxNumberChange"
+      />
+    </block>
+    
+    <view class="popup-bottom">
+      <van-button
+        type="primary"
+        block
+        round
+        custom-class="popup-button"
+        bind:click="onCloseInvoicePopup"
+      >确定</van-button>
+    </view>
+  </van-popup>
+</view>

@@ -204,6 +204,7 @@
 }
 
 /* 功能区 */
+/* 更新功能区样式，适应4个按钮 */
 .function-area {
   position: fixed;
   bottom: 0;
@@ -223,16 +224,27 @@
   flex-direction: column;
   align-items: center;
   flex: 1;
+  max-width: 20%; /* 调整为5个按钮的布局 */
 }
 
 .function-icon {
-  width: 80rpx;
-  height: 80rpx;
+  width: 64rpx; /* 进一步减小图标大小 */
+  height: 64rpx;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10rpx;
+  margin-bottom: 8rpx;
+}
+
+.function-text {
+  font-size: 20rpx; /* 进一步减小文字大小 */
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: center;
 }
 
 .medical-icon {
@@ -250,10 +262,17 @@
   color: #fa8c16;
 }
 
-.function-text {
-  font-size: 24rpx;
-  color: #666;
+.herbal-icon {
+  background-color: #f9f0ff;
+  color: #9254de;
 }
+
+.user-icon {
+  background-color: #f0f5ff;
+  color: #597ef7;
+}
+
+
 
 .animated.fadeIn {
   animation: fadeIn 0.5s ease-in-out;
@@ -302,13 +321,6 @@
   color: #333;
 }
 
-/*!* 添加到现有CSS中 *!*/
-/*.markdown-container {*/
-/*  width: 80%;*/
-/*  overflow-x: hidden;*/
-/*  word-break: break-all;*/
-/*}*/
-
 /* 修改聊天框样式确保滚动正常 */
 .chat-box {
   flex: 1;
@@ -322,3 +334,4 @@
   width: 100%;
   clear: both;
 }
+

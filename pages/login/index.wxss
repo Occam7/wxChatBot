@@ -1,0 +1,219 @@
+/* login/index.wxss */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx 40rpx;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #f7f8fa;
+}
+
+/* 顶部Logo和标题 */
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80rpx;
+}
+
+.logo {
+  width: 180rpx;
+  height: 180rpx;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.subtitle {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 登录方式切换选项卡 */
+.login-tabs {
+  display: flex;
+  width: 90%;
+  border-radius: 10rpx;
+  overflow: hidden;
+  margin-bottom: 60rpx;
+  background-color: #fff;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  font-size: 28rpx;
+  color: #666;
+  position: relative;
+}
+
+.tab.active {
+  color: #1989fa;
+  font-weight: 500;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 40%;
+  height: 4rpx;
+  background-color: #1989fa;
+  border-radius: 2rpx;
+}
+
+/* 登录表单区域 */
+.login-form {
+  width: 100%;
+  margin-bottom: 60rpx;
+}
+
+/* 微信登录 */
+.wechat-login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wechat-login-btn {
+  width: 90%;
+  height: 90rpx;
+  background-color: #07c160;
+  color: white;
+  border-radius: 45rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20rpx;
+  border: none;
+}
+
+.wechat-login-btn text {
+  margin-left: 10rpx;
+  font-size: 30rpx;
+}
+
+.wechat-login-tips {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 20rpx;
+}
+
+/* 手机号登录 */
+.phone-login-container {
+  background-color: #fff;
+  border-radius: 12rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 40rpx;
+}
+
+.phone-login-btn {
+  width: 90%;
+  height: 90rpx;
+  line-height: 90rpx;
+  background-color: #1989fa;
+  color: white;
+  border-radius: 45rpx;
+  margin: 40rpx auto;
+  font-size: 30rpx;
+}
+
+/* 底部协议 */
+.login-footer {
+  font-size: 24rpx;
+  color: #999;
+  position: absolute;
+  bottom: 60rpx;
+}
+
+.agreement-link {
+  color: #1989fa;
+  margin: 0 4rpx;
+}
+
+/* 确认弹窗样式 */
+.confirm-popup {
+  padding: 10rpx;
+}
+
+.confirm-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+  color: #333;
+}
+
+.user-info-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.avatar-preview {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  margin-bottom: 15rpx;
+}
+
+.nickname-preview {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.confirm-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding: 0 20rpx;
+}
+
+.option-label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.confirm-tip {
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30rpx;
+}
+
+.cancel-btn, .confirm-btn {
+  width: 45%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+.cancel-btn {
+  background-color: #f7f7f7;
+  color: #666;
+}
+
+.confirm-btn {
+  background-color: #1989fa;
+  color: white;
+}

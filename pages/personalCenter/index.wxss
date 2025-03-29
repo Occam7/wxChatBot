@@ -1,0 +1,285 @@
+/* personalCenter/index.wxss */
+.personal-center {
+  min-height: 100vh;
+  background-color: #f7f8fa;
+  padding-bottom: 60rpx;
+}
+
+/* 用户信息区域 */
+.user-profile {
+  background: linear-gradient(to right, #1989fa, #39b9f9);
+  padding: 40rpx 30rpx;
+  color: #fff;
+  position: relative;
+  border-radius: 0 0 30rpx 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(25, 137, 250, 0.2);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.5);
+}
+
+.user-details {
+  margin-left: 30rpx;
+}
+
+.nickname {
+  font-size: 36rpx;
+  font-weight: 500;
+  margin-bottom: 10rpx;
+}
+
+.user-id {
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+
+.health-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20rpx;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 16rpx;
+  padding: 20rpx 0;
+}
+
+.stat-item {
+  flex: 1;
+  position: relative;
+}
+
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 2rpx;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.stat-value {
+  font-size: 38rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+
+/* 卡片通用样式 */
+.card {
+  margin: 30rpx 20rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 2rpx solid #f5f5f5;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.card-content {
+  padding: 0;
+}
+
+/* 空白占位符 */
+.empty-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+  color: #999;
+}
+
+.empty-placeholder text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+
+/* 退出登录按钮 */
+.logout-button {
+  margin: 60rpx 30rpx;
+}
+
+/* 弹窗样式 */
+.popup-title {
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: bold;
+  padding: 30rpx 0;
+  color: #333;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin: 60rpx 30rpx;
+}
+
+.cancel-btn {
+  width: 45% !important;
+  border-radius: 40rpx !important;
+}
+
+.save-btn {
+  width: 45% !important;
+  border-radius: 40rpx !important;
+}
+
+/* Tab样式优化 */
+.van-tabs__scroll {
+  background-color: #fff !important;
+}
+
+/* 订单样式 */
+.order-item {
+  margin: 20rpx;
+  border-radius: 12rpx;
+  background-color: #fff;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.order-number {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.order-status {
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+.status-completed {
+  color: #07c160;
+}
+
+.status-pending {
+  color: #ff9900;
+}
+
+.status-processing {
+  color: #1989fa;
+}
+
+.order-products {
+  padding: 20rpx 30rpx;
+}
+
+.product-item {
+  display: flex;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.product-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.product-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+  background-color: #f5f5f5;
+}
+
+.product-info {
+  flex: 1;
+  margin-left: 20rpx;
+  overflow: hidden;
+}
+
+.product-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 10rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.product-spec {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.product-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  margin-left: 20rpx;
+}
+
+.price {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.quantity {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  border-top: 1rpx solid #f5f5f5;
+  background-color: #f9f9f9;
+}
+
+.order-date {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.order-total {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.empty-btn {
+  margin-top: 30rpx !important;
+}

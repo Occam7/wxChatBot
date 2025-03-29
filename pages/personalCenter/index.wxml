@@ -1,0 +1,206 @@
+<!-- personalCenter/index.wxml -->
+<view class="personal-center">
+  <!-- 头部用户信息 -->
+  <view class="user-profile">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="user-details">
+        <view class="nickname">{{userInfo.nickName || '医疗助手用户'}}</view>
+        <view class="user-id">ID: {{userInfo.userId || ''}}</view>
+      </view>
+    </view>
+    <view class="health-stats">
+      <view class="stat-item">
+        <view class="stat-value">{{healthStats.consultationCount}}</view>
+        <view class="stat-label">问诊次数</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value">{{healthStats.healthAssessments}}</view>
+        <view class="stat-label">健康评估</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value">{{healthStats.medicineInquiries}}</view>
+        <view class="stat-label">药品咨询</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 标签页 -->
+  <van-tabs active="{{ activeTab }}" bind:change="onTabChange" animated swipeable sticky>
+    <!-- 健康档案 -->
+    <van-tab title="健康档案">
+      <view class="card health-records">
+        <view class="card-header">
+          <text class="card-title">我的健康信息</text>
+          <van-button size="mini" type="primary" plain round bind:tap="showHealthEditor">编辑</van-button>
+        </view>
+        <view class="card-content">
+          <van-cell-group>
+            <van-cell title="身高" value="{{healthRecords.height ? healthRecords.height + ' cm' : '未设置'}}" />
+            <van-cell title="体重" value="{{healthRecords.weight ? healthRecords.weight + ' kg' : '未设置'}}" />
+            <van-cell title="血型" value="{{healthRecords.bloodType || '未设置'}}" />
+            <van-cell title="过敏史" value="{{healthRecords.allergies.length > 0 ? healthRecords.allergies.join(', ') : '无'}}" />
+            <van-cell title="慢性病史" value="{{healthRecords.chronicDiseases.length > 0 ? healthRecords.chronicDiseases.join(', ') : '无'}}" />
+          </van-cell-group>
+        </view>
+      </view>
+      
+      <view class="card recent-consultations">
+        <view class="card-header">
+          <text class="card-title">最近问诊记录</text>
+          <van-button size="mini" plain type="info" bind:tap="viewAllConsultations">查看全部</van-button>
+        </view>
+        <view class="card-content">
+          <block wx:if="{{recentConsultations.length > 0}}">
+            <van-cell-group>
+              <van-cell wx:for="{{recentConsultations}}" wx:key="id"
+                title="{{item.title || '未命名问诊'}}"
+                value="{{item.date}}"
+                label="{{item.serviceType === 'MEDICAL' ? '医疗问诊' : (item.serviceType === 'HEALTH' ? '中医养生' : '药品咨询')}}"
+                is-link
+                url="{{'/pages/consultationDetail/index?id=' + item.id}}"
+              />
+            </van-cell-group>
+          </block>
+          <view wx:else class="empty-placeholder">
+            <van-icon name="todo-list-o" size="48px" color="#cccccc" />
+            <text>暂无问诊记录</text>
+          </view>
+        </view>
+      </view>
+    </van-tab>
+    
+    <!-- 我的订单 -->
+    <van-tab title="我的订单">
+      <view class="card orders">
+        <view class="card-header">
+          <text class="card-title">中药订单</text>
+        </view>
+        <view class="card-content">
+          <block wx:if="{{orders.length > 0}}">
+            <van-cell-group>
+              <view wx:for="{{orders}}" wx:key="id" class="order-item" bindtap="viewOrderDetail" data-id="{{item.id}}">
+                <view class="order-header">
+                  <text class="order-number">订单号: {{item.orderNumber}}</text>
+                  <text class="order-status {{item.status === '已完成' ? 'status-completed' : (item.status === '待付款' ? 'status-pending' : 'status-processing')}}">{{item.status}}</text>
+                </view>
+                <view class="order-products">
+                  <view class="product-item" wx:for="{{item.products}}" wx:for-item="product" wx:key="id">
+                    <image class="product-image" src="{{product.image}}" mode="aspectFill"></image>
+                    <view class="product-info">
+                      <view class="product-name">{{product.name}}</view>
+                      <view class="product-spec">{{product.specification}}</view>
+                    </view>
+                    <view class="product-price">
+                      <text class="price">¥{{product.price}}</text>
+                      <text class="quantity">x{{product.quantity}}</text>
+                    </view>
+                  </view>
+                </view>
+                <view class="order-footer">
+                  <text class="order-date">{{item.date}}</text>
+                  <text class="order-total">合计: ¥{{item.totalAmount}}</text>
+                </view>
+              </view>
+            </van-cell-group>
+          </block>
+          <view wx:else class="empty-placeholder">
+            <van-icon name="shopping-cart-o" size="48px" color="#cccccc" />
+            <text>暂无订单记录</text>
+            <van-button type="info" size="small" round plain custom-class="empty-btn" url="/pages/shop/index">去购物</van-button>
+          </view>
+        </view>
+      </view>
+      
+      <view class="card notification-settings">
+        <view class="card-header">
+          <text class="card-title">通知设置</text>
+        </view>
+        <view class="card-content">
+          <van-cell-group>
+            <van-cell title="接收消息通知" label="消息和提醒总开关">
+              <van-switch checked="{{ notificationSettings.notificationsEnabled }}" bind:change="toggleNotifications" size="24px" />
+            </van-cell>
+            <van-cell title="订单状态更新" label="获取订单发货、配送等状态更新">
+              <van-switch checked="{{ notificationSettings.orderUpdates }}" bind:change="toggleOrderUpdates" size="24px" />
+            </van-cell>
+            <van-cell title="健康提醒" label="接收服药、复诊等健康提醒">
+              <van-switch checked="{{ notificationSettings.healthReminders }}" bind:change="toggleHealthReminders" size="24px" />
+            </van-cell>
+          </van-cell-group>
+        </view>
+      </view>
+    </van-tab>
+    
+    <!-- 更多 -->
+    <van-tab title="更多">
+      <view class="card about">
+        <van-cell-group>
+          <van-cell title="隐私政策" is-link bind:click="viewPrivacyPolicy" icon="shield-o" />
+          <van-cell title="用户反馈" is-link bind:click="goToFeedback" icon="comment-o" />
+          <van-cell title="关于我们" is-link url="/pages/about/index" icon="info-o" />
+          <van-cell title="版本信息" value="v0.0.1" icon="apps-o" />
+        </van-cell-group>
+      </view>
+      
+      <view class="logout-button">
+        <van-button type="danger" block round bind:tap="logout">退出登录</van-button>
+      </view>
+    </van-tab>
+  </van-tabs>
+  
+  <!-- 健康信息编辑弹窗 -->
+  <van-popup show="{{ showEditHealth }}" position="bottom" round closeable bind:close="closeHealthEditor" custom-style="height: 80%;">
+    <view class="popup-title">编辑健康信息</view>
+    <form bindsubmit="saveHealthRecords">
+      <van-cell-group>
+        <van-field
+          name="height"
+          value="{{ healthRecords.height }}"
+          label="身高"
+          placeholder="请输入身高(cm)"
+          type="digit"
+          input-align="right"
+          suffix-label="cm"
+        />
+        <van-field
+          name="weight"
+          value="{{ healthRecords.weight }}"
+          label="体重"
+          placeholder="请输入体重(kg)"
+          type="digit"
+          input-align="right"
+          suffix-label="kg"
+        />
+        <van-field
+          name="bloodType"
+          value="{{ healthRecords.bloodType }}"
+          label="血型"
+          placeholder="请选择血型"
+          input-align="right"
+          readonly
+          is-link
+        />
+        <van-field
+          name="allergies"
+          value="{{ healthRecords.allergies.join(',') }}"
+          label="过敏史"
+          placeholder="多项请用逗号分隔"
+          input-align="right"
+        />
+        <van-field
+          name="chronicDiseases"
+          value="{{ healthRecords.chronicDiseases.join(',') }}"
+          label="慢性病史"
+          placeholder="多项请用逗号分隔"
+          input-align="right"
+        />
+      </van-cell-group>
+      
+      <view class="form-buttons">
+        <van-button custom-class="cancel-btn" bind:tap="closeHealthEditor">取消</van-button>
+        <van-button custom-class="save-btn" form-type="submit" type="primary">保存</van-button>
+      </view>
+    </form>
+  </van-popup>
+</view>

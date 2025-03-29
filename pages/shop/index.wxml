@@ -1,0 +1,124 @@
+<!-- 中药商店主页面 -->
+<view class="medicine-store">
+  <!-- 顶部导航栏 -->
+  <van-nav-bar 
+    title="百草堂中药" 
+    left-text="分类"
+    left-arrow
+    right-text="搜索"
+    bind:click-left="onClickLeft"
+    bind:click-right="onClickRight"
+    border="{{false}}"
+    custom-class="nav-bar"
+  />
+  
+  <!-- 分类标签栏 -->
+  <van-tabs active="{{ activeTab }}" color="#00C853" line-width="20px" animated swipeable="{{true}}" bind:change="onTabChange">
+    <van-tab title="中药材大全" name="all"></van-tab>
+    <van-tab title="综合" name="comprehensive"></van-tab>
+    <van-tab custom-class="tab-custom">
+      <view slot="title" class="tab-title">
+        <text>销量</text>
+        <van-icon name="{{sortOrder.sales === 'asc' ? 'arrow-up' : 'arrow-down'}}" size="12px" />
+      </view>
+    </van-tab>
+    <van-tab custom-class="tab-custom">
+      <view slot="title" class="tab-title">
+        <text>热度</text>
+        <van-icon name="{{sortOrder.popularity === 'asc' ? 'arrow-up' : 'arrow-down'}}" size="12px" />
+      </view>
+    </van-tab>
+    <van-tab custom-class="tab-custom">
+      <view slot="title" class="tab-title">
+        <text>价格</text>
+        <van-icon name="{{sortOrder.price === 'asc' ? 'arrow-up' : 'arrow-down'}}" size="12px" />
+      </view>
+    </van-tab>
+    <van-tab custom-class="tab-custom">
+      <view slot="title" class="tab-title">
+        <text>最新</text>
+        <van-icon name="{{sortOrder.newest === 'asc' ? 'arrow-up' : 'arrow-down'}}" size="12px" />
+      </view>
+    </van-tab>
+  </van-tabs>
+
+<!-- 内容区域 -->
+  <!-- 在 WXML 文件中使用 scroll-view 包裹商品列表 -->
+  <view class="content-container">
+    <!-- 左侧分类菜单 -->
+    <view class="sidebar">
+      <van-sidebar active-key="{{ activeCategory }}" bind:change="onCategoryChange">
+        <van-sidebar-item title="中药材大全" />
+      </van-sidebar>
+    </view>
+    
+    <!-- 右侧商品列表 - 使用 scroll-view -->
+    <scroll-view scroll-y="true" class="product-list" style="height: calc(100vh - 200px);">
+      <view class="product-wrapper">
+        <van-card
+          wx:for="{{filteredProducts}}"
+          wx:key="id"
+          price="{{item.price}}"
+          origin-price="{{item.originPrice || ''}}"
+          desc="{{item.desc || ''}}"
+          title="{{item.title}}"
+          thumb="{{item.thumb}}"
+        >
+          <view slot="footer">
+            <van-button round type="primary" size="mini" icon="plus" bind:click="addToCart" data-product="{{item}}" />
+          </view>
+        </van-card>
+      </view>
+    </scroll-view>
+  </view>
+  
+  <!-- 底部购物车 -->
+
+  <view class="floating-cart-button" bind:tap="showCartPopup">
+    <van-icon name="cart-o" size="28px" />
+    <view class="cart-count" wx:if="{{cartItems.length > 0}}">{{cartItems.length}}</view>
+    <view class="cart-price-tag" wx:if="{{cartTotalPrice > 0}}" style="width: 70rpx; display: block; box-sizing: border-box; left: 16rpx; top: 79rpx">¥{{cartTotalPrice}}</view>
+</view>
+  
+  <!-- 购物车弹出层 -->
+  <van-popup
+    show="{{showCart}}"
+    position="bottom"
+    round
+    closeable
+    bind:close="onCloseCart"
+    custom-style="height: 60%;"
+  >
+    <view class="cart-popup">
+      <view class="cart-header">购物车</view>
+      <view class="cart-list" wx:if="{{cartItems.length > 0}}">
+        <van-swipe-cell wx:for="{{cartItems}}" wx:key="id" right-width="{{ 65 }}">
+          <van-card
+            price="{{item.price}}"
+            title="{{item.title}}"
+            thumb="{{item.thumb}}"
+          >
+            <view slot="num">
+              <van-stepper value="{{item.quantity}}" min="0" bind:change="onStepperChange" data-id="{{item.id}}" />
+            </view>
+          </van-card>
+          <view slot="right">
+            <van-button square type="danger" text="删除" bind:click="removeFromCart" data-id="{{item.id}}" />
+          </view>
+        </van-swipe-cell>
+      </view>
+      <view class="cart-empty" wx:else>
+        <van-empty description="购物车空空如也" />
+      </view>
+      
+      <!-- 添加结算区域 -->
+      <view class="cart-footer" wx:if="{{cartItems.length > 0}}">
+        <view class="cart-total">
+          <text>合计：</text>
+          <text class="cart-total-price">¥{{cartTotalPrice}}</text>
+        </view>
+        <van-button type="primary" block round custom-class="checkout-btn" bind:click="onSubmit">结算</van-button>
+      </view>
+    </view>
+  </van-popup>
+</view>

@@ -1,0 +1,240 @@
+/* 结算页面样式 WXSS */
+.checkout-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 120px;
+}
+
+.nav-bar {
+  background-color: #00C853 !important;
+}
+
+.nav-bar .van-nav-bar__title {
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.nav-bar .van-nav-bar__text {
+  color: white !important;
+}
+
+.nav-bar .van-icon {
+  color: white !important;
+}
+
+.section {
+  margin-bottom: 12px;
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.section-title text {
+  margin-left: 8px;
+}
+
+/* 地址部分 */
+.address-section {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.address-info {
+  flex: 1;
+}
+
+.address-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.name-phone {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 12px;
+}
+
+.phone {
+  font-size: 15px;
+  color: #333;
+}
+
+.address-detail {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.address-empty {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #333;
+  font-size: 15px;
+}
+
+.address-empty text {
+  margin-left: 8px;
+  flex: 1;
+}
+
+/* 订单部分 */
+.order-items {
+  margin-bottom: 16px;
+}
+
+.order-item {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  margin-right: 12px;
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-title {
+  font-size: 15px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.item-price-qty {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-price {
+  font-size: 16px;
+  color: #FF5252;
+  font-weight: bold;
+}
+
+.item-qty {
+  font-size: 14px;
+  color: #666;
+}
+
+.delivery-method, .order-remark, .order-amount, .order-freight {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 15px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.delivery-method:last-child, .order-remark:last-child, .order-amount:last-child, .order-freight:last-child {
+  border-bottom: none;
+}
+
+.delivery-value, .amount-value, .freight-value {
+  display: flex;
+  align-items: center;
+}
+
+.delivery-value text {
+  margin-right: 8px;
+}
+
+.amount-value, .freight-value {
+  color: #FF5252;
+  font-weight: bold;
+}
+
+.remark-input {
+  flex: 1;
+  margin-left: 16px;
+}
+
+.remark-input-field {
+  padding: 0 !important;
+  text-align: right !important;
+}
+
+/* 支付方式 */
+.payment-icon {
+  margin-right: 8px;
+}
+
+.payment-title {
+  font-size: 15px !important;
+}
+
+/* 发票信息 */
+.invoice-title {
+  font-size: 15px !important;
+}
+
+.invoice-value {
+  font-size: 14px !important;
+  color: #666 !important;
+}
+
+/* 底部提交栏 */
+.submit-bar-placeholder {
+  height: 50px;
+}
+
+.submit-bar {
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05) !important;
+}
+
+.submit-button {
+  background-color: #00C853 !important;
+  border-color: #00C853 !important;
+  border-radius: 24px !important;
+  font-weight: bold !important;
+}
+
+/* 弹出层 */
+.popup-title {
+  text-align: center;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.popup-bottom {
+  padding: 16px;
+}
+
+.popup-button {
+  background-color: #00C853 !important;
+  border-color: #00C853 !important;
+}

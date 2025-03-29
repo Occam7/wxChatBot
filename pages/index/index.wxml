@@ -100,5 +100,25 @@
       </view>
       <text class="function-text">养生保健</text>
     </view>
+  
+
+    <view class="function-item" bind:tap="navigateToHerbalShop">
+      <view class="function-icon herbal-icon">
+        <van-icon name="shop" size="28px" />
+      </view>
+      <text class="function-text">百草堂</text>
+    </view>
+
+    <view class="function-item" bind:tap="navigateToUserCenter">
+      <view class="function-icon user-icon">
+        <van-icon name="contact" size="28px" />
+      </view>
+      <text class="function-text">个人中心</text>
+    </view>
+
+    
+    
   </view>
+  
 </view>
+

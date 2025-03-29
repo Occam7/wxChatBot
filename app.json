@@ -1,11 +1,15 @@
 {
   "pages": [
+    "pages/login/index",
     "pages/index/index",
-    "pages/logs/logs",
     "pages/medicine_page/index",
     "pages/medical_page/index",
     "pages/health_page/index",
-    "pages/doctor/index"
+    "pages/doctor/index",
+    "pages/shop/index",
+    "pages/personalCenter/index",
+    "pages/checkout/index",
+    "pages/orderDetail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -19,7 +23,7 @@
   "useExtendedLib": {
     "weui": true
   },
-  "entryPagePath": "pages/index/index",
+  "entryPagePath": "pages/login/index",
   "usingComponents": {
     "van-button": "@vant/weapp/button/index",
     "van-field": "@vant/weapp/field/index",
@@ -27,7 +31,17 @@
     "van-popup": "@vant/weapp/popup/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-grid": "@vant/weapp/grid/index",
-    "van-grid-item": "@vant/weapp/grid-item/index"
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-sidebar": "@vant/weapp/sidebar/index",
+    "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+    "van-card": "@vant/weapp/card/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-empty": "@vant/weapp/empty/index"
   },
   "requiredBackgroundModes": [
     "audio"

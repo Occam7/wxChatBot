@@ -1,0 +1,253 @@
+.medicine-store {
+  min-height: 100vh;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-bar {
+  background-color: #00C853 !important;
+}
+
+.nav-bar .van-nav-bar__title {
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.nav-bar .van-nav-bar__text {
+  color: white !important;
+}
+
+.nav-bar .van-icon {
+  color: white !important;
+}
+
+.tab-title {
+  display: flex;
+  align-items: center;
+}
+
+.tab-title text {
+  margin-right: 4px;
+}
+
+.content-container {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 200px); /* 调整高度，考虑顶部和底部的所有元素 */
+  overflow: hidden;
+}
+.product-wrapper {
+  padding: 8px;
+}
+.sidebar {
+  width: 90px;
+  background-color: #f5f5f5;
+  height: calc(100vh - 120px);
+}
+
+.product-list {
+  flex: 1;
+  padding: 8px;
+  overflow-y: auto;
+  height: calc(100vh - 120px);
+}
+
+.van-card {
+  margin-bottom: 10px !important;
+  background-color: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+}
+
+.van-card__title {
+  font-size: 16px !important;
+  font-weight: bold !important;
+  color: #333 !important;
+}
+
+.van-card__price {
+  color: #FF5252 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+.van-card__thumb {
+  width: 90px !important;
+  height: 90px !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+}
+
+.van-button--primary {
+  background-color: #00C853 !important;
+  border-color: #00C853 !important;
+}
+
+.cart-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+
+.van-submit-bar__button {
+  border-radius: 20px !important;
+}
+
+.cart-popup {
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-header {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 0;
+  text-align: center;
+  border-bottom: 1px solid #f5f5f5;
+  margin-bottom: 10px;
+}
+
+.cart-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.cart-empty {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.cart-price {
+  position: absolute;
+  bottom: -24px;
+  font-size: 14px;
+  color: #FF5252;
+  font-weight: bold;
+  background: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  white-space: nowrap; /* 防止文本换行 */
+}
+.floating-cart-button {
+  position: fixed;
+  left: 20px;
+  bottom: 80px;
+  width: 55px; 
+  height: 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #00C853;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #FF5252;
+  color: white;
+  border-radius: 50%;
+  min-width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.cart-price-tag {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  background-color: white;
+  color: #FF5252;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background-color: white;
+  border-top: 1px solid #f5f5f5;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cart-total-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #FF5252;
+}
+
+.checkout-btn {
+  margin-top: 10px;
+}
+
+.cart-price-tag {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  background-color: white;
+  color: #FF5252;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  z-index: 101; /* 确保显示在最上层 */
+}
+
+.cart-footer {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  background-color: white;
+  border-top: 1px solid #f5f5f5;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cart-total-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #FF5252;
+}
